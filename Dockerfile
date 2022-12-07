@@ -16,5 +16,5 @@ RUN mv /etc/init.d/apacheds-2.0.0.AM26-default /etc/init.d/apacheds
 
 EXPOSE 10389 10636
 
-CMD service apacheds restart & tail -f /dev/null
+CMD /etc/init.d/apacheds restart & tail -f /dev/null
 
