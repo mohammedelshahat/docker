@@ -14,6 +14,9 @@ RUN apt-get -f install
 
 RUN mv /etc/init.d/apacheds-2.0.0.AM26-default /etc/init.d/apacheds
 
-RUN /etc/init.d/apacheds start &
+RUN /etc/init.d/apacheds restart &
 
 EXPOSE 10389 10636
+
+CMD ["tail", "-f", "/dev/null"]
+
