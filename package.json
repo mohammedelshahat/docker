@@ -1,0 +1,50 @@
+{
+  "name": "awa-server",
+  "version": "1.0.0",
+  "description": "AWA server to integrate with HyperLedger Fabric",
+  "main": "index.js",
+  "scripts": {
+    "start": "DEBUG=app* node index.js",
+    "dev": "nodemon",
+    "register:fabric": "export $(grep -v '^#' .env | xargs -d '\n') && cd fabric/scripts && node enrollAdmin.js && node registerUser.js",
+    "checkCC:fabric": "export $(grep -v '^#' .env | xargs -d '\n') && cd fabric/scripts && node checkCC.js",
+    "migrate:offchain": "export $(grep -v '^#' .env | xargs -d '\n') && DEBUG=app:offchain:migration && node fabric/offchain/migration/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^6.12.3",
+    "ajv-errors": "^1.0.1",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-promise-router": "^4.0.1",
+    "fabric-ca-client": "^2.2.0",
+    "fabric-network": "^2.2.0",
+    "helmet": "^3.23.3",
+    "lodash": "^4.17.19",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.2.5",
+    "nano": "^9.0.3",
+    "nodemon": "^2.0.4",
+    "sequelize": "^6.3.5",
+    "trim-request": "^1.0.6"
+  },
+  "devDependencies": {
+    "eslint": "^7.5.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "sequelize-cli": "^6.2.0"
+  },
+  "nodemonConfig": {
+    "delay": "1500",
+    "restartable": "rs",
+    "env": {
+      "DEBUG": "app*"
+    }
+  }
+}

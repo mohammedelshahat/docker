@@ -1,20 +1,16 @@
-FROM openjdk:11.0.5-slim-buster
+# Base image
+FROM node:12
+# Make folder to put our files in
+RUN mkdir -p /usr/src/app
+RUN mkdir -p /usr/src/app/backend
+# Set working directory so that all subsequent command runs in this folder
+WORKDIR /usr/src/app/backend
+# Copy package json and install dependencies
+COPY package*.json ./
+RUN npm install
+# Copy our app
+COPY . .
+# Expose port to access server
+EXPOSE 8080:8080
 
-RUN apt-get update
-
-RUN apt-get install wget procps -y
-
-WORKDIR /tmp
-
-RUN wget http://dlcdn.apache.org/directory/apacheds/dist/2.0.0.AM26/apacheds-2.0.0.AM26-amd64.deb
-
-RUN dpkg -i apacheds-2.0.0.AM26-amd64.deb
-
-RUN apt-get -f install
-
-RUN mv /etc/init.d/apacheds-2.0.0.AM26-default /etc/init.d/apacheds
-
-EXPOSE 10389 10636
-
-CMD /etc/init.d/apacheds restart & tail -f /dev/null
-
+CMD [ "npm", "start"]
